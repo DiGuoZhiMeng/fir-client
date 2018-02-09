@@ -1,4 +1,4 @@
-import {HelloScene} from './hello'
+import {LoginScene} from './login'
 
 function preload(resources) {
   return new Promise(resolve => {
@@ -7,6 +7,5 @@ function preload(resources) {
 }
 
 export {
-  HelloScene,
-  preload,
+  LoginScene,
 }

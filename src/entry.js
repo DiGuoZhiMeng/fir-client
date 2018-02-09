@@ -1,5 +1,6 @@
-import g_resources, {res} from './resource'
-import {HelloScene, preload} from "./scenes"
+import {LoginScene} from "./scenes"
+import './resource'
+import ConnectScene from "./net/scene";
 
 const {game, view, director} = cc
 
@@ -7,12 +8,11 @@ game.entry = async () => {
   view.adjustViewPort(true)
 
   // Setup the resolution policy and design resolution size
-  view.setDesignResolutionSize(960, 640, cc.ResolutionPolicy.SHOW_ALL)
+  view.setDesignResolutionSize(960, 550, cc.ResolutionPolicy.SHOW_ALL)
 
   // The game will be resized when browser size change
   view.resizeWithBrowserSize(true)
 
   //load resources
-  await preload(g_resources)
-  director.runScene(new HelloScene())
+  director.runScene(new ConnectScene)
 }

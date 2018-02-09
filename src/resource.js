@@ -1,15 +1,13 @@
-var res = {
-    HelloWorld_png : "res/HelloWorld.png",
-};
+import {director} from 'cc'
 
-var g_resources = [];
-for (var i in res) {
-    g_resources.push(res[i]);
+const res = {
+  BG: 'res/background.jpg',
+  BOARD: 'res/board.jpg',
+  BLACK: 'res/black.jpg',
+  RED: 'res/red.jpg',
+  LOGIN: 'res/login.png',
+  LOGIN_ON: 'res/login_on.png',
+  LOADING: 'res/loading.jpg',
 }
-window.g_resources = g_resources
 
-export default g_resources
-
-export {
-  res
-}
+director.$res = res
