@@ -52,7 +52,7 @@ export default class Layer extends cc.Layer {
     const loginBtn = new ccui.Button(director.$res.LOGIN, director.$res.LOGIN_ON)
     loginBtn.x = size.width / 2
     loginBtn.y = size.height / 2 - 100
-    loginBtn.addClickEventListener(() => {
+    loginBtn.addClickEventListener(async () => {
       console.log(username.getString(), password.getString())
     })
     this.addChild(loginBtn)

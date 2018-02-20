@@ -8,6 +8,7 @@ const res = {
   LOGIN: 'res/login.png',
   LOGIN_ON: 'res/login_on.png',
   LOADING: 'res/loading.jpg',
+  LOADING2: `/res/loading.png`,
 }
 
 director.$res = res
