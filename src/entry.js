@@ -1,6 +1,5 @@
-import {LoginScene} from "./scenes"
 import './resource'
-import ConnectScene from "./net/scene";
+import {ConnectScene} from "./net"
 
 const {game, view, director} = cc
 

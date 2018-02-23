@@ -1,6 +1,6 @@
-import {winSize} from 'cc'
+import {winSize, director} from 'cc'
 
-class LoadingLayer extends cc.LayerColor {
+export default class LoadingLayer extends cc.LayerColor {
   ctor() {
     super.ctor(cc.color(0, 0, 0, 255 * .5))
 
@@ -23,20 +23,20 @@ class LoadingLayer extends cc.LayerColor {
     this.setVisible(false)
   }
 
-  show(t) {
+  show(t = .33) {
     this.setOpacity(0)
-    this.icon.setOpacity(0)
+    this.children.forEach(v => v.setOpacity(0))
     this.setVisible(true)
 
     return new Promise(resolve => {
       let fadeIn = new cc.FadeTo(t, 255 * .5)
       let next = new cc.CallFunc(() => resolve())
-      this.icon.runAction(fadeIn.clone())
+      this.children.forEach(v => v.runAction(fadeIn.clone()))
       this.runAction(new cc.Sequence([fadeIn, next]))
     })
   }
 
-  hide(t) {
+  hide(t = .33) {
     return new Promise(resolve => {
       let fadeOut = new cc.FadeOut(t)
       let fn = new cc.CallFunc(() => this.setVisible(false))
@@ -44,23 +44,5 @@ class LoadingLayer extends cc.LayerColor {
       this.icon.runAction(fadeOut.clone())
       this.runAction(new cc.Sequence([fadeOut, fn, next]))
     })
-  }
-}
-
-
-export default class BaseScene extends cc.Scene {
-  ctor() {
-    super.ctor()
-
-    this.loading = new LoadingLayer
-    this.addChild(this.loading, 999)
-  }
-
-  showLoading() {
-    return this.loading.show()
-  }
-
-  hideLoading() {
-    return this.loading.hide()
   }
 }

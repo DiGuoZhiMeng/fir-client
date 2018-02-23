@@ -1,5 +1,18 @@
 import {director} from 'cc'
 
+function broadcast(node, data) {
+  let {header, body} = data
+  let next = true
+  if (typeof node.wsEvents === 'object') {
+    if (node.wsEvents[header] instanceof Function) {
+      next = node.wsEvents[header].call(node, body)
+    }
+  }
+  if (next !== false && node.children instanceof Array) {
+    node.children.forEach(v => broadcast(v, data))
+  }
+}
+
 export default class Ws {
   _ws = null
 
@@ -14,17 +27,22 @@ export default class Ws {
   }
 
   _onClose(e) {
-    console.log('链接关闭了', e)
     director.popToRootScene()
+    director._scenesStack[0].onError(e)
   }
 
-  _onMessage(data) {
-    const {h, b} = JSON.parse(data)
-
+  _onMessage(messageEvent) {
+    try {
+      let data = JSON.parse(messageEvent.data)
+      broadcast(director.getRunningScene(), data)
+    } catch (e) {
+      console.error('解析message失败', e, messageEvent)
+      return
+    }
   }
 
   send(header, body) {
-    const data = JSON.stringify({h, b})
+    const data = JSON.stringify({header: header.toUpperCase(), body})
     this._ws.send(data)
   }
 

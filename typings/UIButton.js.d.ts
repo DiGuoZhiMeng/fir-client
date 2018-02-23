@@ -31,6 +31,8 @@ declare namespace ccui {
 
         getDescription(): String;
 
+        addClickEventListener(fn: Function)
+
         getNormalTextureSize();
 
         getTitleColor();
