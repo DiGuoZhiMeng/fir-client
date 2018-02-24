@@ -4,13 +4,36 @@ import AlertLayer from "./alert-layer"
 import PromptLayer from "./prompt-layer"
 import conn from '../../net'
 
+const ALERT = 'ALERT'
+const OTHER_LOGIN = 'OTHER_LOGIN'
+
 export default class BaseScene extends cc.Scene {
+  wsEvents = {
+    [ALERT](body) {
+      this.$unloading()
+      this.$alert(body.title, body.content)
+    },
+    [OTHER_LOGIN](body) {
+      alert('你被踢下线')
+    }
+  }
+
   ctor() {
     super.ctor()
+    this._init()
+  }
 
+  _init() {
+    this._initLoading()
+    this._initMessageBox()
+  }
+
+  _initLoading() {
     this.loading = new LoadingLayer
     this.addChild(this.loading, 999)
+  }
 
+  _initMessageBox() {
     this.confirm = new ConfirmLayer
     this.addChild(this.confirm, 998)
 

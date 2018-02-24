@@ -13,5 +13,6 @@ game.entry = async () => {
   view.resizeWithBrowserSize(true)
 
   //load resources
+  director.registry = {}
   director.runScene(new ConnectScene)
 }

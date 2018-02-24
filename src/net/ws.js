@@ -32,6 +32,7 @@ export default class Ws {
   }
 
   _onMessage(messageEvent) {
+    console.log('response', messageEvent.data)
     try {
       let data = JSON.parse(messageEvent.data)
       broadcast(director.getRunningScene(), data)
