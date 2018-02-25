@@ -27,6 +27,7 @@ export default class FormLayer extends cc.Layer {
     const username = new EditBox(cc.size(300, 50), iptBg1)
     username.setFontColor(cc.color(0, 0, 0))
     username.setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
+    username.setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
     username.setMaxLength(16)
     username.setPlaceHolder("请输入用户名")
     username.setFont("fonts/font.ttf", 20)
