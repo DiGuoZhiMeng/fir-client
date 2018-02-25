@@ -1,19 +1,12 @@
 import BaseScene from "../base"
-import BgLayer from "./bg-layer";
+import BgLayer from "./bg-layer"
+import ChatLayer from "./chat-layer";
 
 export default class HomeScene extends BaseScene {
   ctor(){
     super.ctor()
-    this._init()
-  }
-
-  _init(){
-    this._initBg()
-  }
-
-  _initBg(){
-    let layer = new BgLayer
-
+    this.addChild(new BgLayer)
+    this.addChild(new ChatLayer)
   }
 
 }

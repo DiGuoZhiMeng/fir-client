@@ -43,6 +43,7 @@ export default class Ws {
   }
 
   send(header, body) {
+    console.log('sending', {header: header.toUpperCase(), body})
     const data = JSON.stringify({header: header.toUpperCase(), body})
     this._ws.send(data)
   }

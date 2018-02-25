@@ -6,9 +6,9 @@ import {director} from 'cc'
  */
 export function $loading(show = true) {
   if (show) {
-    director.getRunningScene().$loading()
+    return director.getRunningScene().$loading()
   } else {
-    director.getRunningScene().$unloading()
+    return director.getRunningScene().$unloading()
   }
 }
 
@@ -18,7 +18,7 @@ export function $loading(show = true) {
  * @param content
  */
 export function $alert(title, content) {
-  director.getRunningScene().$alert(title, content)
+  return director.getRunningScene().$alert(title, content)
 }
 
 /**
@@ -27,7 +27,7 @@ export function $alert(title, content) {
  * @param content
  */
 export function $confirm(title, content) {
-  director.getRunningScene().$confirm(title, content)
+  return director.getRunningScene().$confirm(title, content)
 }
 
 /**
@@ -37,7 +37,7 @@ export function $confirm(title, content) {
  * @param defaultVal
  */
 export function $prompt(title, text, defaultVal = '') {
-  director.getRunningScene().$prompt(title, text, defaultVal)
+  return director.getRunningScene().$prompt(title, text, defaultVal)
 }
 
 /**

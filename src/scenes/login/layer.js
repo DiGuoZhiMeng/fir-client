@@ -1,7 +1,8 @@
-import {winSize} from 'cc'
+import {winSize, director} from 'cc'
 import BgLayer from "./bg-layer"
 import FormLayer from "./form-layer"
 import {$loading, $registry} from "../../common/director"
+import HomeScene from "../home/scene";
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 
@@ -13,6 +14,7 @@ export default class Layer extends cc.Layer {
       $loading(false)
       switch (next) {
         case 'home':
+          director.pushScene(new HomeScene)
           break
         case 'game':
           break

@@ -4,6 +4,7 @@ import AlertLayer from "./alert-layer"
 import PromptLayer from "./prompt-layer"
 import conn from '../../net'
 
+const ERROR = 'ERROR'
 const ALERT = 'ALERT'
 const OTHER_LOGIN = 'OTHER_LOGIN'
 
@@ -15,7 +16,11 @@ export default class BaseScene extends cc.Scene {
     },
     [OTHER_LOGIN](body) {
       alert('你被踢下线')
-    }
+    },
+    [ERROR](msg) {
+      alert('发生错误，服务端拒绝访问:' + msg)
+      window.location.reload()
+    },
   }
 
   ctor() {
@@ -66,7 +71,7 @@ export default class BaseScene extends cc.Scene {
 
   $delay(t) {
     return new Promise(resolve => {
-      this.scheduleOnce(() => resolve(), t)
+      this.scheduleOnce(() => resolve(t), t)
     })
   }
 
