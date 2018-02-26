@@ -26,7 +26,7 @@ export default class ConnectScene extends BaseScene {
       await conn.connect('ws://127.0.0.1:8485')
       // await this.$delay(.333)
       // director.pushScene(new TransitionPageTurn(1.5, new LoginScene))
-      director.pushScene(new HomeScene())
+      director.pushScene(new LoginScene())
     } catch (e) {
       this.onError(e)
     }

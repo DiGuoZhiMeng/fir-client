@@ -20,7 +20,7 @@ export default class PromptLayer extends ConfirmLayer {
     let input = new EditBox(cc.size(400, 50), iptBg1)
     input.setFontColor(cc.color(0, 0, 0))
     input.setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
-    input.setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
+    input.setInputFlag(cc.EDITBOX_INPUT_FLAG_SENSITIVE)
     input.setPlaceHolder("请输入内容")
     input.setFont("fonts/font.ttf", 20)
     input.setDelegate(this)

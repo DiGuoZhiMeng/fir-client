@@ -2,6 +2,8 @@ import EditBox from "../../common/edit-box"
 import {director} from 'cc'
 import {$loading, $send} from "../../common/director";
 
+const CHAT_HOME = 'CHAT_HOME'
+
 export default class ChatFormLayer extends cc.Layer {
   ctor() {
     super.ctor()
@@ -19,7 +21,7 @@ export default class ChatFormLayer extends cc.Layer {
     let editBox = new EditBox(cc.size(345, 50))
     editBox.setFontColor(cc.color(255, 255, 255))
     editBox.setInputMode(cc.EDITBOX_INPUT_MODE_SINGLELINE)
-    editBox.setInputFlag(cc.EDITBOX_INPUT_FLAG_INITIAL_CAPS_WORD)
+    editBox.setInputFlag(cc.EDITBOX_INPUT_FLAG_SENSITIVE)
     editBox.setMaxLength(40)
     editBox.setPlaceHolder("请输入内容")
     editBox.attr({
@@ -38,8 +40,7 @@ export default class ChatFormLayer extends cc.Layer {
       y: 112,
     })
     btn.addClickEventListener(async () => {
-      // $send(HEADER_LOGIN, form)
-      // $loading()
+      $send(CHAT_HOME, this.ipt.getString())
       this.ipt.setString("")
     })
     this.addChild(btn)

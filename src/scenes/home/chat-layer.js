@@ -2,6 +2,12 @@ import MsgLayer from "./msg-layer";
 import ChatFormLayer from "./chat-form-layer";
 
 export default class ChatLayer extends cc.Layer {
+  wsEvents = {
+    CHAT_HOME(body) {
+      this.msgLayer.addMsg(body)
+    }
+  }
+
   ctor() {
     super.ctor()
 
