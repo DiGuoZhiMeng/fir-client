@@ -36,8 +36,8 @@ export function $confirm(title, content) {
  * @param text
  * @param defaultVal
  */
-export function $prompt(title, text, defaultVal = '') {
-  return director.getRunningScene().$prompt(title, text, defaultVal)
+export function $prompt(title, text, defaultVal = '', placeholder = '请输入内容') {
+  return director.getRunningScene().$prompt(title, text, defaultVal, placeholder)
 }
 
 /**

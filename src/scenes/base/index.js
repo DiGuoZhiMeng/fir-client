@@ -65,8 +65,8 @@ export default class BaseScene extends cc.Scene {
     return this.alert.alert(title, text)
   }
 
-  $prompt(title, text, defaultVal = '') {
-    return this.prompt.prompt(title, text, defaultVal)
+  $prompt(title, text, defaultVal = '', placeholder = '请输入内容') {
+    return this.prompt.prompt(title, text, defaultVal, placeholder)
   }
 
   $delay(t) {

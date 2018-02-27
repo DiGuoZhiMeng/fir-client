@@ -32,11 +32,12 @@ export default class PromptLayer extends ConfirmLayer {
     this.addChild(this.input)
   }
 
-  prompt(title, text, defaultVal = '', t = .33) {
+  prompt(title, text, defaultVal = '', placeholder = '请输入内容', t = .33) {
     return new Promise(resolve => {
       this._resolve = resolve
       this._t = t
       this.input.setString(defaultVal)
+      this.input.setPlaceHolder(placeholder)
       this.text.setString(text)
       this.title.setString(title)
       this._show(t)

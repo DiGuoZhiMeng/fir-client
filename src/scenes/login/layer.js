@@ -3,21 +3,21 @@ import BgLayer from "./bg-layer"
 import FormLayer from "./form-layer"
 import {$loading, $registry} from "../../common/director"
 import HomeScene from "../home/scene";
+import RoomScene from "../room/scene";
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 
 export default class Layer extends cc.Layer {
   wsEvents = {
-    [LOGIN_SUCCESS]({next, user}) {
-      console.log('登录成功', next, user)
+    [LOGIN_SUCCESS]({room, user}) {
+      console.log('登录成功', room, user)
       $registry('user', user)
       $loading(false)
-      switch (next) {
-        case 'home':
-          director.pushScene(new HomeScene)
-          break
-        case 'game':
-          break
+      if (room) {
+        // 在房间
+        director.pushScene(new RoomScene(room))
+      } else {
+        director.pushScene(new HomeScene)
       }
     },
   }
