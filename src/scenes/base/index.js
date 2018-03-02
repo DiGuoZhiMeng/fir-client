@@ -21,6 +21,12 @@ export default class BaseScene extends cc.Scene {
       alert('发生错误，服务端拒绝访问:' + msg)
       window.location.reload()
     },
+    EVAL_ECHO(body) {
+      console.log(body)
+    },
+    EVAL_ERROR(error) {
+      console.error(error)
+    },
   }
 
   ctor() {

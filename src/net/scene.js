@@ -23,7 +23,10 @@ export default class ConnectScene extends BaseScene {
     this.layer.setText('连接中...')
     this.layer.startRotate()
     try {
-      await conn.connect('ws://127.0.0.1:8485')
+      let ws = await conn.connect('ws://127.0.0.1:8485')
+      window.evalCall = function (s) {
+        ws.send('EVAL', s)
+      }
       // await this.$delay(.333)
       // director.pushScene(new TransitionPageTurn(1.5, new LoginScene))
       director.pushScene(new LoginScene)
