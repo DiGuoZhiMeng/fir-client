@@ -3,8 +3,8 @@ import {director} from 'cc'
 const res = {
   BG: 'res/background.jpg',
   BOARD: 'res/board.jpg',
-  BLACK: 'res/black.jpg',
-  RED: 'res/red.jpg',
+  BLACK: 'res/black.png',
+  WHITE: 'res/red.png',
   LOGIN: 'res/login.png',
   LOGIN_ON: 'res/login_on.png',
   REGISTER: `res/register.png`,
@@ -29,6 +29,7 @@ const res = {
     START_ON: 'res/home/start_on.png',
     CHAT_BG: 'res/home/chat_bg.png',
   },
+  EXIT: 'res/exit.png',
 }
 
 director.$res = res

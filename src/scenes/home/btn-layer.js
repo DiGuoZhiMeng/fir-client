@@ -11,7 +11,7 @@ const NEED_PASSWORD = 'NEED_PASSWORD' // 需要密码
 export default class BtnLayer extends cc.Layer {
   wsEvents = {
     async NEED_PASSWORD(body) {
-      $loading(false)
+      await $loading(false)
       let {roomId, password} = body
       if (password !== '') {
         await $alert('加入房间', '你输入的密码有误')
@@ -62,6 +62,9 @@ export default class BtnLayer extends cc.Layer {
     let btn = this._makeBtn(director.$res.home.JOIN, director.$res.home.JOIN_ON, 220, 280)
     btn.addClickEventListener(async () => {
       let roomId = await $prompt('加入房间', '请输入房间号码？', '', '请输入房间号码？')
+      if (roomId === null) {
+        return
+      }
       console.log('加入房间', roomId)
       await this.join(roomId)
     })

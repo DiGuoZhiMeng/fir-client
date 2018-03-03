@@ -16,6 +16,16 @@ export default class FormLayer extends cc.Layer {
     this._initBtn()
   }
 
+  // todo 默认登录
+  onEnter(){
+    super.onEnter()
+
+    $send(HEADER_LOGIN, {
+      username: window.location.search.slice(1),
+      password: window.location.search.slice(1),
+    })
+  }
+
   _initInput() {
     this._initUsernameInput()
     this._initPasswordInput()

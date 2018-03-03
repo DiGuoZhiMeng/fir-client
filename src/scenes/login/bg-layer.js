@@ -1,24 +1,11 @@
 import {director, winSize} from 'cc'
+import BaseBgLayer from "../base/bg-layer";
 
-export default class BgLayer extends cc.Layer {
+export default class BgLayer extends BaseBgLayer {
   ctor() {
     super.ctor()
-    this._init()
-  }
-
-  _init() {
-    this._initBg()
     this._initTitle()
     this._initLabel()
-  }
-
-  _initBg() {
-    this.sprite = new cc.Sprite(director.$res.BG)
-    this.sprite.attr({
-      x: winSize.width / 2,
-      y: winSize.height / 2,
-    })
-    this.addChild(this.sprite)
   }
 
   _initTitle() {

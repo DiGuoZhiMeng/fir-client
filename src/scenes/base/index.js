@@ -7,31 +7,50 @@ import conn from '../../net'
 const ERROR = 'ERROR'
 const ALERT = 'ALERT'
 const OTHER_LOGIN = 'OTHER_LOGIN'
+const EVAL_ECHO = 'EVAL_ECHO'
+const EVAL_ERROR = 'EVAL_ERROR'
+
+const wsEvents = {
+  [ALERT](body) {
+    this.$unloading()
+    if (typeof body === 'string')
+      this.$alert('提示', body)
+    else
+      this.$alert(body.title, body.content)
+  },
+  [OTHER_LOGIN](body) {
+    alert('你被踢下线')
+    window.location.reload()
+  },
+  [ERROR](msg) {
+    alert('发生错误，服务端拒绝访问:' + msg)
+    window.location.reload()
+  },
+  [EVAL_ECHO](body) {
+    console.log(body)
+  },
+  [EVAL_ERROR](error) {
+    console.error(error)
+  },
+}
 
 export default class BaseScene extends cc.Scene {
-  wsEvents = {
-    [ALERT](body) {
-      this.$unloading()
-      this.$alert(body.title, body.content)
-    },
-    [OTHER_LOGIN](body) {
-      alert('你被踢下线')
-    },
-    [ERROR](msg) {
-      alert('发生错误，服务端拒绝访问:' + msg)
-      window.location.reload()
-    },
-    EVAL_ECHO(body) {
-      console.log(body)
-    },
-    EVAL_ERROR(error) {
-      console.error(error)
-    },
-  }
 
   ctor() {
     super.ctor()
+
+    this.events(wsEvents)
     this._init()
+  }
+
+  events(wsEvents) {
+    if (this.wsEvents) {
+      wsEvents = {
+        ...this.wsEvents,
+        ...wsEvents,
+      }
+    }
+    this.wsEvents = wsEvents
   }
 
   _init() {

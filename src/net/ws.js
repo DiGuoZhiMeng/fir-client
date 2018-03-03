@@ -32,9 +32,11 @@ export default class Ws {
   }
 
   _onMessage(messageEvent) {
-    console.log('response', messageEvent.data)
     try {
       let data = JSON.parse(messageEvent.data)
+      if (data.header !== 'EVAL_ECHO' && data.header !== 'EVAL_ERROR') {
+        console.log('response', data.header, data.body)
+      }
       broadcast(director.getRunningScene(), data)
     } catch (e) {
       console.error('解析message失败', e, messageEvent)
@@ -43,7 +45,8 @@ export default class Ws {
   }
 
   send(header, body) {
-    console.log('sending', {header: header.toUpperCase(), body})
+    if (header !== 'EVAL')
+      console.log('sending', {header: header.toUpperCase(), body})
     const data = JSON.stringify({header: header.toUpperCase(), body})
     this._ws.send(data)
   }
