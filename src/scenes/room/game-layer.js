@@ -11,6 +11,29 @@ export default class GameLayer extends cc.Layer {
 
       // 游戏开始了
       this.setGame(game)
+    },
+    GAME_END(result) {
+      let {reason, winner} = result
+      this._game = null
+      this._board.finish()
+      this.parent.addMsg(reason)
+
+      let userLayer = this.parent.user
+      userLayer.setWhiteSubTitle('未准备')
+      userLayer.setBlackSubTitle('未准备')
+
+      if (winner.id === userLayer._black.id) {
+        userLayer._black.win++
+        userLayer._white.lose++
+      } else {
+        userLayer._white.win++
+        userLayer._black.lose++
+      }
+      userLayer.setBlackInfo(userLayer._black)
+      userLayer.setWhiteInfo(userLayer._white)
+
+      userLayer._blackReady = false
+      userLayer._whiteReady = false
     }
   }
 
@@ -41,7 +64,6 @@ export default class GameLayer extends cc.Layer {
 
   _initBoard() {
     this._board = new BoardLayer
-    console.log(this._board)
     this.addChild(this._board)
   }
 

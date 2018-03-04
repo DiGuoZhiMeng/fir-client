@@ -45,6 +45,7 @@ export default class BoardLayer extends cc.Layer {
   startClock(clock, fn) {
     this.clearClock()
 
+    fn(this._clock)
     this._clockEv = setInterval(() => {
       this._clock--
       fn(this._clock)
@@ -154,7 +155,6 @@ export default class BoardLayer extends cc.Layer {
   }
 
   setGame(game) {
-    console.log(game)
     if (game) {
       if (game.finished) {
         this.finish()
@@ -190,5 +190,6 @@ export default class BoardLayer extends cc.Layer {
     this.clearClock()
     this._clock = null
     this._label.setVisible(true)
+    this._label.setString("游戏结束")
   }
 }

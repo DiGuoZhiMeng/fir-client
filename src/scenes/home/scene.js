@@ -4,6 +4,7 @@ import RoomScene from "../room/scene"
 import {director} from 'cc'
 import ChatLayer from "../base/chat-layer";
 import BgLayer from "../base/bg-layer";
+import {$delay, $loading} from "../../common/director";
 
 const ENTER_ROOM = 'ENTER_ROOM'
 
@@ -22,11 +23,5 @@ export default class HomeScene extends BaseScene {
     this.addChild(new BgLayer)
     this.addChild(new ChatLayer('CHAT_HOME', 'CHAT_HOME', 650, 280))
     this.addChild(new BtnLayer)
-  }
-
-  onEnter(){
-    super.onEnter()
-
-    this.$unloading()
   }
 }

@@ -67,7 +67,6 @@ export default class UserLayer extends cc.Layer {
   ctor(roomInfo) {
     super.ctor()
     this._initUserAvatar()
-    let user = $registry('user')
 
     this.setBlack(roomInfo.black, roomInfo.blackReady)
     this.setWhite(roomInfo.white, roomInfo.whiteReady)
@@ -77,7 +76,7 @@ export default class UserLayer extends cc.Layer {
     this._black = null
     this._blackReady = null
     this._blackAvatar = new cc.Sprite(director.$res.BLACK)
-    this._blackAvatar.setScale(.5, .5)
+    this._blackAvatar.setScale(.3, .3)
     this._blackAvatar.attr({
       x: 600,
       y: 500,
@@ -97,13 +96,19 @@ export default class UserLayer extends cc.Layer {
       x: 600,
       y: 435,
     })
+    this._blackInfo = new cc.LabelTTF('胜0 负0')
+    this._blackInfo.attr({
+      x: 600,
+      y: 455,
+    })
     this.addChild(this._blackAvatar)
     this.addChild(this._blackLabel)
+    this.addChild(this._blackInfo)
 
     this._white = null
     this._whiteReady = null
     this._whiteAvatar = new cc.Sprite(director.$res.WHITE)
-    this._whiteAvatar.setScale(.5, .5)
+    this._whiteAvatar.setScale(.3, .3)
     this._whiteAvatar.attr({
       x: 750,
       y: 500,
@@ -123,8 +128,14 @@ export default class UserLayer extends cc.Layer {
       x: 750,
       y: 435,
     })
+    this._whiteInfo = new cc.LabelTTF('胜0 负0')
+    this._whiteInfo.attr({
+      x: 750,
+      y: 455,
+    })
     this.addChild(this._whiteAvatar)
     this.addChild(this._whiteLabel)
+    this.addChild(this._whiteInfo)
   }
 
   setBlack(user, ready) {
@@ -132,10 +143,12 @@ export default class UserLayer extends cc.Layer {
       this._black = user
       this._blackReady = ready
       this.setBlackSubTitle(ready ? '已准备' : '未准备')
+      this.setBlackInfo(user)
     } else {
       this._black = null
       this._blackReady = null
       this._blackLabel.setString(`未加入`)
+      this.setBlackInfo(null)
     }
   }
 
@@ -144,11 +157,28 @@ export default class UserLayer extends cc.Layer {
       this._white = user
       this._whiteReady = ready
       this.setWhiteSubTitle(ready ? '已准备' : '未准备')
+      this.setWhiteInfo(user)
     } else {
       this._white = null
       this._whiteReady = null
       this._whiteLabel.setString(`未加入`)
+      this.setWhiteInfo(null)
     }
+  }
+
+  setBlackInfo(user) {
+    if (user) {
+      this._blackInfo.setString(`胜${user.win} 负${user.lose}`)
+    } else {
+      this._blackInfo.setString(`胜0 负0`)
+    }
+  }
+
+  setWhiteInfo(user) {
+    if (user)
+      this._whiteInfo.setString(`胜${user.win} 负${user.lose}`)
+    else
+      this._whiteInfo.setString(`胜0 负0`)
   }
 
   setBlackSubTitle(text) {

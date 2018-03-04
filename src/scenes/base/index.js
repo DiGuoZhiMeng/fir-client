@@ -107,4 +107,13 @@ export default class BaseScene extends cc.Scene {
   $close() {
     conn.close()
   }
+
+  onExit() {
+    super.onExit()
+
+    this.$unloading()
+    this.alert._hide(0.01)
+    this.confirm._hide(.01)
+    this.prompt._hide(.01)
+  }
 }

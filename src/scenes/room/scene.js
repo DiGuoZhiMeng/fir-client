@@ -3,6 +3,7 @@ import ChatLayer from "../base/chat-layer";
 import BgLayer from "../base/bg-layer";
 import UserLayer from "./user-layer";
 import GameLayer from "./game-layer";
+import {$delay, $loading} from "../../common/director";
 
 
 export default class RoomScene extends BaseScene {

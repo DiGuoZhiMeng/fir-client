@@ -75,6 +75,8 @@ export default class BtnLayer extends cc.Layer {
     let btn = this._makeBtn(director.$res.home.START, director.$res.home.START_ON, 220, 430)
     btn.addClickEventListener(() => {
       console.log('快速开始')
+      $loading()
+      $send('QUICK_START', {})
     })
     this.addChild(btn)
   }
